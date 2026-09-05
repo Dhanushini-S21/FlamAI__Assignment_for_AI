@@ -264,5 +264,4 @@ https://www.desmos.com/calculator/tfn01kghwl
 ## 16. Author
 
 **Dhanushini**
-
-Research and Development / AI Assignment
+ AI Assignment
