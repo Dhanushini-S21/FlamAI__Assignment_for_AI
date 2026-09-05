@@ -1,153 +1,268 @@
-# R&D / AI Parametric Curve Assignment
+# Parametric Curve Parameter Estimation
 
-## Folder structure
+## Research and Development / AI Assignment
+
+### 1. Objective
+
+Estimate unknown parameters **θ, M, and X** from a given parametric equation of a curve using the provided `(x, y)` data points.
+
+The estimated parameters are selected such that the predicted curve minimizes the **L1 distance** from the expected curve obtained from the provided dataset.
+
+---
+
+## 2. Problem Statement
+
+Given the parametric equation:
+
+$$
+x(t)=t\cos(\theta)-e^{M|t|}\sin(0.3t)\sin(\theta)+X
+$$
+
+$$
+y(t)=42+t\sin(\theta)+e^{M|t|}\sin(0.3t)\cos(\theta)
+$$
+
+The unknown parameters are:
+
+* \(\theta\)
+* \(M\)
+* \(X\)
+
+### Parameter Constraints
+
+$$
+0^\circ < \theta < 50^\circ
+$$
+
+$$
+-0.05 < M < 0.05
+$$
+
+$$
+0 < X < 100
+$$
+
+Parameter \(t\) satisfies:
+
+$$
+6 < t < 60
+$$
+
+---
+
+## 3. Input Data
+
+The provided `xy_data.csv` file contains points that lie on the expected curve.
+
+The dataset is used as reference data for estimating the unknown parameters.
+
+---
+
+## 4. Approach
+
+The parameter estimation process follows these steps:
+
+1. Load `(x, y)` coordinates from `xy_data.csv`.
+2. Define the given parametric equations.
+3. Generate uniformly sampled values of \(t\) within the specified range.
+4. Define the unknown parameters \(\theta\), \(M\), and \(X\).
+5. Apply parameter constraints according to the assignment.
+6. Generate predicted curve coordinates.
+7. Compare predicted coordinates with expected data points.
+8. Calculate L1 distance between expected and predicted points.
+9. Apply numerical optimization to minimize L1 distance.
+10. Obtain optimal values of \(\theta\), \(M\), and \(X\).
+11. Plot expected data points and fitted parametric curve.
+12. Report final parameter values and L1 distance.
+
+---
+
+## 5. Optimization Objective
+
+The optimization objective is to minimize the L1 distance:
+
+$$
+L_1=\sum_i \left(|x_i-\hat{x}_i|+|y_i-\hat{y}_i|\right)
+$$
+
+where:
+
+* \(x_i,y_i\) are expected data points.
+* \(\hat{x}_i,\hat{y}_i\) are predicted points generated using estimated parameters.
+
+The optimization searches for:
+
+$$
+(\theta,M,X)=\arg\min_{\theta,M,X} L_1
+$$
+
+subject to the specified parameter constraints.
+
+---
+
+## 6. Estimated Parameters
+
+Final estimated values:
+
+$$
+\theta = YOUR_VALUE
+$$
+
+$$
+M = YOUR_VALUE
+$$
+
+$$
+X = YOUR_VALUE
+$$
+
+### Final L1 Distance
+
+$$
+L_1 = YOUR_L1_VALUE
+$$
+
+---
+
+## 7. Final Parametric Equation
+
+After substituting estimated parameters:
+
+$$
+\left(
+t\cos(YOUR\_THETA)
+-e^{YOUR\_M|t|}\sin(0.3t)\sin(YOUR\_THETA)
++YOUR\_X,
+\right.
+$$
+
+$$
+\left.
+42+t\sin(YOUR\_THETA)
++e^{YOUR\_M|t|}\sin(0.3t)\cos(YOUR\_THETA)
+\right)
+$$
+
+### Desmos Form
 
 ```text
-RD_Curve_Assignment/
-│
-├── data/
-│   └── xy_data.csv
-│
-├── src/
-│   └── solve.py
-│
-├── results/
-│   └── generated files appear here after running
+(
+t*cos(YOUR_THETA)-e^(YOUR_M*abs(t))*sin(0.3*t)*sin(YOUR_THETA)+YOUR_X,
+42+t*sin(YOUR_THETA)+e^(YOUR_M*abs(t))*sin(0.3*t)*cos(YOUR_THETA)
+)
+```
+
+---
+
+## 8. Visualization
+
+The fitted curve is compared with the provided data points.
+
+`results/fitted_curve.png` contains the visualization of:
+
+* Expected data points
+* Predicted parametric curve
+* Curve fitting quality
+
+---
+
+## 9. Project Structure
+
+```text
+parametric-curve-parameter-estimation/
 │
 ├── README.md
+├── xy_data.csv
+├── estimate_parameters.py
 ├── requirements.txt
-└── .gitignore
+├── .gitignore
+│
+└── results/
+    ├── fitted_curve.png
+    └── parameter_results.txt
 ```
 
-## Important
+---
 
-Run commands from project root:
+## 10. Technologies Used
 
-```powershell
-cd "C:\Users\dhanu\Downloads\RD_Curve_Assignment"
+* Python
+* NumPy
+* Pandas
+* SciPy
+* Matplotlib
+* Numerical Optimization
+* Parametric Curve Fitting
+* L1 Distance Minimization
+
+---
+
+## 11. Installation
+
+Clone the repository:
+
+```bash
+git clone YOUR_GITHUB_REPOSITORY_URL
 ```
 
-Do NOT run from `src` folder.
+Navigate to project directory:
 
-## Install
+```bash
+cd parametric-curve-parameter-estimation
+```
 
-```powershell
+Install dependencies:
+
+```bash
 pip install -r requirements.txt
 ```
 
-## Run
+---
 
-```powershell
-python src\solve.py
+## 12. Execution
+
+Run:
+
+```bash
+python estimate_parameters.py
 ```
 
-## Assignment
+The program calculates:
 
-Find unknown parameters:
+* Optimal \(\theta\)
+* Optimal \(M\)
+* Optimal \(X\)
+* L1 distance
+* Fitted curve visualization
 
-```text
-theta
-M
-X
-```
+---
 
-Constraints:
+## 13. Reproducibility
 
-```text
-0 < theta < 50 degrees
--0.05 < M < 0.05
-0 < X < 100
-6 < t < 60
-```
+The complete parameter-estimation workflow is implemented in `estimate_parameters.py`.
 
-## Parametric equation
+Using the provided `xy_data.csv` and dependencies listed in `requirements.txt`, the estimation process can be reproduced locally.
 
-```text
-x = t*cos(theta) - exp(M*|t|)*sin(0.3t)*sin(theta) + X
+---
 
-y = 42 + t*sin(theta) + exp(M*|t|)*sin(0.3t)*cos(theta)
-```
+## 14. Result
 
-## Mathematical transformation
+The optimized parameters define a parametric curve that closely fits the provided dataset while minimizing the L1 distance between expected and predicted points.
 
-Define:
+The final values of \(\theta\), \(M\), and \(X\) are reported above and can be directly substituted into the original parametric equation.
 
-```text
-u = (x-X)*cos(theta) + (y-42)*sin(theta)
+---
 
-v = -(x-X)*sin(theta) + (y-42)*cos(theta)
-```
+## 15. Reference
 
-Then:
+Desmos visualization and curve representation:
 
-```text
-u = t
+https://www.desmos.com/calculator/tfn01kghwl
 
-v = exp(M*|t|)*sin(0.3t)
-```
+---
 
-Therefore:
+## 16. Author
 
-```text
-v = exp(M*|u|)*sin(0.3u)
-```
+**Dhanushini**
 
-This allows theta, M, X to be optimized without treating every t value as separate unknown.
-
-## Optimization
-
-Global optimization:
-
-```text
-scipy.optimize.differential_evolution
-```
-
-Local refinement:
-
-```text
-scipy.optimize.minimize
-```
-
-## Expected fitted values
-
-Approximately:
-
-```text
-theta = 30 degrees
-M = 0.03
-X = 55
-```
-
-Run code to obtain exact floating-point values.
-
-## Final equation
-
-```text
-(t*cos(0.5235987756)
- - exp(0.03*|t|)*sin(0.3t)*sin(0.5235987756) + 55,
-
- 42 + t*sin(0.5235987756)
- + exp(0.03*|t|)*sin(0.3t)*cos(0.5235987756))
-```
-
-## Output
-
-After execution:
-
-```text
-results/
-├── results.txt
-├── predicted_points.csv
-└── curve_fit.png
-```
-
-## GitHub
-
-```powershell
-git init
-git add .
-git commit -m "Parametric curve parameter estimation"
-git branch -M main
-git remote add origin YOUR_GITHUB_REPOSITORY_URL
-git push -u origin main
-```
+Research and Development / AI Assignment
