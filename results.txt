@@ -1,0 +1,10 @@
+Parametric Curve Parameter Estimation
+====================================
+
+theta = 29.9999729321 degrees
+M = 0.0299999969
+X = 54.9999982128
+Minimum t = 6.0494054727
+Maximum t = 59.9951707024
+Total L1 = 0.0052451382
+Mean L1 = 0.0000034968
